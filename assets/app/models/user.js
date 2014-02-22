@@ -9,6 +9,7 @@ define(['backbone'], function(Backbone){
         defaults: {
             name       : '',
             password   : '',
+            photo      : '',
             groupp     : 2,
             lasttime   : 0
         },

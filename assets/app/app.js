@@ -3,11 +3,11 @@
  */
 
 define(
-    ['marionette', 'vent', 'underscore', 'handlebars', 'models/user', 'views/Header'],
-function (marionette, vent, _, Handlebars, User, Header) {
+    ['marionette', 'vent', 'underscore', 'handlebars', 'models/user', 'views/Header', 'views/Sidebar'],
+function (marionette, vent, _, Handlebars, User, Header, Sidebar) {
 
     var app = new marionette.Application(),
-        userdata = {name: 'Maxim Denisov', password: '12345', groupp: 1};
+        userdata = {name: 'Maxim Denisov', password: '12345', photo: 'assets/img/avatar.jpg', groupp: 1};
 
     app.addRegions({
         header  : '#header',
@@ -21,6 +21,7 @@ function (marionette, vent, _, Handlebars, User, Header) {
         };
 
         app.header.show(new Header(viewOptions));
+        app.sidebar.show(new Sidebar());
     });
 
     return app;

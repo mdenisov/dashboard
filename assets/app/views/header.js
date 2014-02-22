@@ -11,12 +11,14 @@ define(['marionette', 'vent', 'hbs!templates/header'], function (Marionette, ven
 
         ui : {
             sidebar_toggle : '.sidebar-toggle-box',
-            right_toggle : '.toggle-right-box'
+            right_toggle : '.toggle-right-box',
+            search: '.search'
         },
 
         events : {
             'click .sidebar-toggle-box':	'onSidebarToggleClick',
-            'click .toggle-right-box':		'onRightToggleClick'
+            'click .toggle-right-box':		'onRightToggleClick',
+            'keypress .search':             'onSearchKeypress'
         },
 
         onSidebarToggleClick: function(evt) {
@@ -26,20 +28,19 @@ define(['marionette', 'vent', 'hbs!templates/header'], function (Marionette, ven
 
         onRightToggleClick: function(evt) {
             vent.trigger('rightbar:toggle');
-        }
+        },
 
-//
-//        onInputKeypress : function(evt) {
-//            var ENTER_KEY = 13;
-//            var todoText = this.ui.input.val().trim();
-//
-//            if ( evt.which === ENTER_KEY && todoText ) {
+        onSearchKeypress : function(evt) {
+            var ENTER_KEY = 13;
+            var searchText = this.ui.search.val().trim();
+
+            if ( evt.which === ENTER_KEY && searchText ) {
 //                this.collection.create({
 //                    title : todoText
 //                });
-//                this.ui.input.val('');
-//            }
-//        }
+                this.ui.search.val('');
+            }
+        }
     });
 
 });
