@@ -3,8 +3,8 @@
  */
 
 define(
-    ['marionette', 'vent', 'underscore', 'handlebars', 'models/user'],
-function (marionette, vent, _, Handlebars, User) {
+    ['marionette', 'vent', 'underscore', 'handlebars', 'models/user', 'views/Header'],
+function (marionette, vent, _, Handlebars, User, Header) {
 
     var app = new marionette.Application(),
         userdata = {name: 'Maxim Denisov', password: '12345', groupp: 1};
@@ -19,6 +19,8 @@ function (marionette, vent, _, Handlebars, User) {
         var viewOptions = {
             model : new User(userdata)
         };
+
+        app.header.show(new Header(viewOptions));
     });
 
     return app;
