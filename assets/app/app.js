@@ -6,7 +6,8 @@ define(
     ['marionette', 'vent', 'underscore', 'handlebars'],
 function (marionette, vent, _, Handlebars) {
 
-    var app = new marionette.Application();
+    var app = new marionette.Application(),
+        User = {name: 'Maxim Denisov'};
 
     app.addRegions({
         header  : '#header',
@@ -15,7 +16,9 @@ function (marionette, vent, _, Handlebars) {
     });
 
     app.addInitializer(function(){
-
+        var viewOptions = {
+            model : User
+        };
     });
 
     return app;
