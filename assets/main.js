@@ -3,14 +3,14 @@ require.config({
     urlArgs: 'bust=' + (new Date()).getTime(),
     paths:{
         // Core Libraries
-        "jquery":"../bower_components/jquery/dist/jquery",
-//        "jqueryui":"../libs/jqueryui",
-        "underscore":"../bower_components/underscore/underscore",
-        "backbone":"../bower_components/backbone/backbone",
-        "backbone.wreqr":"../bower_components/backbone.wreqr/lib/amd/backbone.wreqr",
-        "backbone.babysitter":"../bower_components/backbone.babysitter/lib/amd/backbone.babysitter",
-        "marionette":"../bower_components/marionette/lib/backbone.marionette",
-        "handlebars":"../bower_components/handlebars/handlebars",
+        "jquery": "../bower_components/jquery/dist/jquery",
+        "underscore": "../bower_components/underscore/underscore",
+        "backbone": "../bower_components/backbone/backbone",
+        "backbone.wreqr": "../bower_components/backbone.wreqr/lib/amd/backbone.wreqr",
+        "backbone.babysitter": "../bower_components/backbone.babysitter/lib/amd/backbone.babysitter",
+        "backbone.localStorage": "../bower_components/backbone.localStorage/backbone.localStorage",
+        "marionette": "../bower_components/marionette/lib/backbone.marionette",
+        "handlebars": "../bower_components/handlebars/handlebars",
 //        "hbs":"../libs/hbs",
 //        "i18nprecompile":"../libs/i18nprecompile",
 //        "json2":"../libs/json2",
@@ -19,14 +19,14 @@ require.config({
 
         // Plugins
 //        "backbone.validateAll":"../libs/plugins/Backbone.validateAll",
-        "bootstrap":"../bower_components/bootstrap/bootstrap.min"
+        "bootstrap": "../bower_components/bootstrap/bootstrap.min"
 //        "text":"../libs/plugins/text",
 //        "jasminejquery": "../libs/plugins/jasmine-jquery"
     },
 
     // Sets the configuration for your third party scripts that are not AMD compatible
     shim:{
-        '../bower_components/backbone.localStorage/backbone.localStorage' : ['backbone'],
+        'backbone.localStorage' : ['backbone'],
 
         // Twitter Bootstrap jQuery plugins
         "bootstrap": ["jquery"],
