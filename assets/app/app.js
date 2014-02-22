@@ -3,11 +3,11 @@
  */
 
 define(
-    ['marionette', 'vent', 'underscore', 'handlebars'],
-function (marionette, vent, _, Handlebars) {
+    ['marionette', 'vent', 'underscore', 'handlebars', 'models/user'],
+function (marionette, vent, _, Handlebars, User) {
 
     var app = new marionette.Application(),
-        User = {name: 'Maxim Denisov'};
+        userdata = {name: 'Maxim Denisov', password: '12345', groupp: 1};
 
     app.addRegions({
         header  : '#header',
@@ -17,7 +17,7 @@ function (marionette, vent, _, Handlebars) {
 
     app.addInitializer(function(){
         var viewOptions = {
-            model : User
+            model : new User(userdata)
         };
     });
 
