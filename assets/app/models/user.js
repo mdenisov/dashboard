@@ -2,8 +2,19 @@
  * Created by ROMEO on 22.02.14.
  */
 
-define(['backbone', 'backbone.localStorage'], function(Backbone){
+define(['backbone'], function(Backbone){
     'use strict';
 
-    return {};
+    return Backbone.Model.extend({
+        defaults: {
+            name       : '',
+            password   : '',
+            groupp     : 1,
+            lasttime   : 0
+        },
+
+        initialize : function() {
+            this.set('lasttime', Date.now());
+        }
+    });
 });
