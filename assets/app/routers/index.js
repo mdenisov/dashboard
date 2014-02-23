@@ -8,7 +8,9 @@ define(['marionette'],function(marionette) {
     return marionette.AppRouter.extend({
 
         appRoutes:{
-            '*filter': 'setFilter'
+            ''              : 'default',
+            '/'             : 'default',
+            'page/:page'        : 'page'
         }
 
     });

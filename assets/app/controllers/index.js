@@ -6,7 +6,13 @@ define(['vent'], function (vent) {
     "use strict";
 
     return {
-        setFilter : function(param) {
+        default : function(param) {
+            console.log(param);
+//            vent.trigger('todoList:filter', param.trim() || '');
+        },
+
+        page : function(page) {
+            console.log(page);
 //            vent.trigger('todoList:filter', param.trim() || '');
         }
     };

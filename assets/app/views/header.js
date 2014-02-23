@@ -23,7 +23,6 @@ define(['marionette', 'vent', 'hbs!templates/header'], function (Marionette, ven
 
         onSidebarToggleClick: function(evt) {
             vent.trigger('sidebar:toggle');
-//            this.ui.sidebar.toggleClass('hide-left-bar');
         },
 
         onRightToggleClick: function(evt) {
