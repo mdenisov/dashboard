@@ -10,10 +10,11 @@
 
         // Plugins
         "bootstrap": "bower_components/bootstrap/bootstrap.min",
+        "cookie": "bower_components/jquery.cookie/jquery.cookie",
 
         // Application
-        app: "app/app"
+        app: "app/main"
     },
-    name: "main",
+    name: "config",
     out: "main-built.js"
 })
