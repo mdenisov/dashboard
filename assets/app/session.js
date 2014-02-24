@@ -5,50 +5,49 @@
 
 define([
 
-  // Libraries.
-  'jquery',
-  'underscore',
-  'backbone',
+    'jquery',
+    'underscore',
+    'backbone',
+    'cookie'
 
-  // Plugins.
-  'jquery.cookie'
-],
-function($, _, Backbone){
-  'use strict';
+], function($, _, Backbone) {
 
-  var Session = Backbone.Model.extend({
+    var Session = Backbone.Model.extend({
 
-    // On default, neither accessToken nor userId will be available.
-    defaults: {
-        'accessToken': null,
-        'userId': null
-    },
+        defaults: {
+            'accessToken': null
+        },
 
-    // Creating a new session instance will attempt to load the user cookie.
-    initialize: function() {
-        this.load();
-    },
+        // Creating a new session instance will attempt to load the user cookie.
+        initialize: function() {
+            this.load();
+        },
 
-    // Returns true if the user is authenticated.
-    authenticated: function() {
-        return Boolean(this.get('accessToken'));
-    },
+        // Returns true if the user is authenticated.
+        isAuthenticated: function() {
+            return Boolean(this.get('accessToken'));
+        },
 
-    // Saving will create the cookie data instead of syncing the model.
-    save: function(authHash) {
-        $.cookie('userId', authHash.id);
-        $.cookie('accessToken', authHash.accessToken);
-    },
+        // Saving will create the cookie data instead of syncing the model.
+        save: function(model) {
+            $.cookie('accessToken', model.get('token'));
+            $.cookie('email', model.get('email'));
+        },
 
-    // Loads the user's credentials from the cookie data.
-    load: function() {
-        this.userId = $.cookie('userId');
-        this.accessToken = $.cookie('accessToken');
-    }
-  });
+        // Loads the user's credentials from the cookie data.
+        load: function() {
+            this.set('accessToken', $.cookie('accessToken'));
+            this.set('email', $.cookie('email'));
+            //set the Authorization header
+            Backbone.BasicAuth.set($.cookie('accessToken'));
+        },
 
-  // Creating a new session will load the user's credentials from the cookie
-  // data – if available.
-  return new Session();
+        destroy: function() {
+            return $.removeCookie('accessToken');
+        }
+
+    });
+
+    return new Session();
 
 });

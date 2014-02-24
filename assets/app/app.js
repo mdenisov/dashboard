@@ -3,6 +3,7 @@
  */
 
 define([
+
     // Libraries.
     'jquery',
     'underscore',
@@ -10,43 +11,8 @@ define([
     'marionette',
     'vent',
     'handlebars'
+
 ], function ($, _, Backbone, Marionette, vent, Handlebars) {
-
-    /* =========================================================================
-     * The following will make Marionette's template retrieval work with
-     * in both development (templates found in html files) and production
-     * environment (templates all compiled AS JST templates into the require.js
-     * file. This will also use JST instead of the Marionette.TemplateCache.
-     */
-    Backbone.Marionette.Renderer.render = function(templateId, data) {
-        var path = 'assets/app/templates/' + templateId + '.html';
-
-        // Localize or create a new JavaScript Template object.
-        var JST = window.JST = window.JST || {};
-
-        // Make a blocking ajax call (does not reduce performance in production,
-        // because templates will be contained by the require.js file).
-        if (!JST[path]) {
-            $.ajax({
-                url: App.root + path,
-                async: false
-            }).then(function(templateHtml) {
-                JST[path] = _.template(templateHtml);
-            });
-        }
-
-        if (!JST[path]) {
-            var msg = 'Could not find "' + templateId + '"';
-            var error = new Error(msg);
-            error.name = 'NoTemplateError';
-            throw error;
-        }
-
-        // Call the template function with the data.
-        return JST[path](data);
-    };
-    /* ======================================================================== */
-
 
     // Creates a new Marionette application.
     var App = new Marionette.Application();
@@ -54,86 +20,74 @@ define([
     // Set up basic paths.
     App.root = '/dashboard/';
 
-    // Add the main region, that will hold the page layout.
-    App.addRegions({
-        regionMain: '#container'
-    });
-
-    // Adds any methods to be run after the app was initialized.
-    App.addInitializer(function() {
-        this.initAppLayout();
-    });
-
-    // Start backbone's history for hash navigation after the app was initialized.
-    App.on('initialize:after', function() {
-        Backbone.history.start({
-            pushState: true,
-            root: App.root
-        });
-    });
-
-    // The main initializing function sets up the basic layout and its regions.
-    App.initAppLayout = function() {
-        var AppLayout = Backbone.Marionette.Layout.extend({
-            template: 'layouts/main',
-            regions: {
-                regionError: '#error', // Contains any error messages.
-                regionUserInfo: '#userInfo', // Will contain any user controls (login/logout).
-                regionContent: '#content' // Will contain the page content.
-            }
-        });
-
-        // Inject the main layout into the #main region of the page.
-        var layout = new AppLayout();
-
-        App.regionMain.show(layout);
-
-        // All links with the role attribute set to nav-main will navigate through
-        // the application's router.
-        $('a[role=nav-main]').click(function(e) {
-            e.preventDefault();
-
-            App.Router.navigate($(this).attr('href'), {
-                trigger: true
-            });
-        });
+    // application configuration
+    App.config = {
+        // you can provide an absolute URL like http://api.yourserver.com/v1
+        apiUrl: 'api'
     };
+
+    //custom region that shows a view in bootstrap modal
+    var ModalRegion = Marionette.Region.extend({
+        el: "#modal",
+
+        onShow: function(view) {
+            view.on("close", this.hideModal, this);
+            this.$el.modal('show');
+        },
+
+        hideModal: function() {
+            this.$el.modal('hide');
+        }
+    });
+
+    // main regions, check index.html
+    App.addRegions({
+        container: "#container",
+        modal:   ModalRegion
+    });
+
+    // app events
+    App.on("initialize:after", function() {
+        Backbone.history.start();
+    });
+
+    vent.on('app:show', function(appView) {
+        App.container.show(appView);
+    });
+
+    vent.on('modal:show', function(view) {
+        App.modal.show(view);
+    });
+
+    vent.on('modal:close', function() {
+        App.modal.hideModal();
+    });
+
+    App.addInitializer(function(options) {
+        // we neeed to override loadTemplate because Marionette expect to recive only the template ID
+        // but actually it's the full template html (require + text plugin)
+        Backbone.Marionette.TemplateCache.prototype.loadTemplate = function (templateId) {
+            var template = templateId;
+            // remove this comment if you want to make sure you have a template before trying to compile it
+            /*
+             if (!template || template.length === 0) {
+             var msg = "Could not find template: '" + templateId + "'";
+             var err = new Error(msg);
+             err.name = "NoTemplateError";
+             throw err;
+             }*/
+
+            return template;
+        };
+
+        // init ALL app routers
+        _(options.routers).each(function(router) {
+            new router();
+        });
+
+    });
 
     // Returns the app object to be available to other modules through require.js.
     return App;
 
-
-
-
-
-
-//    var app = new Marionette.Application(),
-//        dashboard,
-//        userdata = {name: 'Maxim Denisov', password: '12345', photo: 'assets/img/avatar.jpg', groupp: 1};
-//
-//    app.ui = {
-//        sidebar: $('#sidebar')
-//    };
-//
-//    app.addRegions({
-//        header  : '#header',
-//        main    : '#main',
-//        sidebar : '#sidebar'
-//    });
-//
-//    app.addInitializer(function(){
-//        var viewOptions = {
-//            model : new User(userdata)
-//        };
-//
-//        app.header.show(new Header(viewOptions));
-//        app.sidebar.show(new Sidebar());
-//    });
-//
-//    vent.on('sidebar:toggle', function(evt) {
-//        console.log(evt);
-//        app.ui.sidebar.toggleClass('hide-left-bar');
-//    });
-//
-//    return app;
 });

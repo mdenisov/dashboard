@@ -10,20 +10,36 @@ define([
     // The application.
     'app',
 
-    // Misc.
-    'routers/index',
-    'session'
+    // Auth module
+    'auth',
 
-], function($, App, router, session) {
+    // Application routers
+    'routers/MainRouter',
+    'routers/UserRouter'
+
+], function($, App, Auth, MainRouter, UserRouter) {
     'use strict';
 
-    // Use jquery's document ready function to start the app as soon as the DOM
-    // was fully loaded.
-    $(function() {
+    // Navigation handler
+    $(document).on('click', 'a:not([data-bypass])', function(event) {
 
-        App.Router = router;
-        App.start();
+        var href = $(this).attr('href');
 
+        if (href && href.indexOf('#') === 0) {
+            event.preventDefault();
+
+            Backbone.history.navigate(href, true);
+        }
     });
+
+    // Start the app
+    var options = {
+        routers: {
+            main   : MainRouter,
+            user   : UserRouter
+        }
+    };
+
+    App.start(options);
 
 });

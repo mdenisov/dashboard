@@ -24,7 +24,7 @@ require.config({
 //        "backbone.validateAll":"../libs/plugins/Backbone.validateAll",
         "bootstrap": "../bower_components/bootstrap/bootstrap.min",
         "text": "../text",
-        "jquery.cookie": "../bower_components/jquery.cookie/jquery.cookie"
+        "cookie": "../bower_components/jquery.cookie/jquery.cookie"
 //        "text":"../libs/plugins/text",
 //        "jasminejquery": "../libs/plugins/jasmine-jquery"
     },
