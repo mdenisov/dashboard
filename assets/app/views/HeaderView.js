@@ -2,11 +2,17 @@
  * Created by ROMEO on 22.02.14.
  */
 
-define(['marionette', 'vent', 'hbs!templates/header'], function (Marionette, vent, headerTpl) {
+define([
+
+    'marionette',
+    'vent',
+    'hbs!templates/HeaderTemplate'
+
+], function (Marionette, vent, HeaderTemplate) {
     "use strict";
 
     return Marionette.ItemView.extend({
-        template : headerTpl,
+        template : HeaderTemplate,
         className: 'clearfix',
 
         ui : {

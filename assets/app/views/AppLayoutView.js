@@ -6,15 +6,17 @@ define([
 
     'underscore',
     'marionette',
-    'hbs!templates/layouts/AppLayoutTemplate'
+    'hbs!templates/layouts/AppLayoutTemplate',
+    'views/HeaderView',
+    'views/SidebarView'
 
-], function(_, Marionette, template) {
+], function(_, Marionette, MainTemplate, HeaderView, SidebarView) {
 
     return Marionette.Layout.extend({
 
         className: 'app-layout',
 
-        template: template,
+        template: MainTemplate,
 
         regions: {
             header:     "#header",
@@ -24,7 +26,12 @@ define([
 
         initialize: function (options) {
 
-            $('body').removeClass('stripes-bg');
+            $('body').removeClass('login-body');
+
+            console.log(this.header, new HeaderView());
+
+            this.header.show(new HeaderView(options));
+            this.sidebar.show(new SidebarView(options));
 
         }
 

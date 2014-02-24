@@ -8,6 +8,7 @@ define([
     'app'
 
 ], function(Backbone, App) {
+    "use strict";
 
     return Backbone.Model.extend({
 

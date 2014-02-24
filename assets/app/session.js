@@ -11,6 +11,7 @@ define([
     'cookie'
 
 ], function($, _, Backbone) {
+    "use strict";
 
     var Session = Backbone.Model.extend({
 

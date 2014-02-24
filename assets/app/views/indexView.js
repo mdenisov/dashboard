@@ -9,6 +9,7 @@ define([
     'hbs!templates/IndexTemplate'
 
 ], function(_, Marionette, template) {
+    "use strict";
 
     return Marionette.ItemView.extend({
         className: 'clearfix',
