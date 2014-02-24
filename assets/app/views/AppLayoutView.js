@@ -12,6 +12,7 @@ define([
     'views/SidebarView'
 
 ], function(_, Marionette, vent, MainTemplate, HeaderView, SidebarView) {
+    "use strict";
 
     return Marionette.Layout.extend({
 

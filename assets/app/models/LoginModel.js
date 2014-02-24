@@ -12,16 +12,16 @@ define([
 
     return Backbone.Model.extend({
 
-        url: App.config.apiUrl + '/login',
+        url: App.config.apiUrl + '/login.php',
 
         defaults: {
-            email    : '',
-            password : '',
-            token    : ''
+            email       : '',
+            password    : '',
+            name        : '',
+            token       : ''
         },
 
         authenticate: function (email, password) {
-
             var authToken = btoa(email + ':' + password);
             var dfd = new $.Deferred();
 

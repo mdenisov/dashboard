@@ -37,8 +37,8 @@ define([
         index: function () {
 
             if(!session.isAuthenticated()) {
-//                Backbone.history.navigate("#login", {trigger: true});
-//                return false;
+                Backbone.history.navigate("#login", {trigger: true});
+                return false;
             }
 
             var view = new IndexView();
@@ -74,7 +74,7 @@ define([
                     var token = model.get('token');
                     session.save(model);
                     session.load();
-                    Backbone.history.navigate("#home", {trigger: true});
+                    Backbone.history.navigate("#index", {trigger: true});
                 },
                 function (model, xhr, options){
                     self.$el.find('.alert').show();
