@@ -7,11 +7,9 @@ define([
     'underscore',
     'marionette',
     'vent',
-    'hbs!templates/layouts/AppLayoutTemplate',
-    'views/HeaderView',
-    'views/SidebarView'
+    'hbs!templates/layouts/AppLayoutTemplate'
 
-], function(_, Marionette, vent, MainTemplate, HeaderView, SidebarView) {
+], function(_, Marionette, vent, MainTemplate) {
     "use strict";
 
     return Marionette.Layout.extend({
@@ -30,12 +28,9 @@ define([
 
             $('body').removeClass('login-body');
 
-            console.log(options);
+            vent.on('sidebar:toggle', _.bind(function() {
 
-            vent.on("layout:rendered", _.bind(function() {
-
-                this.header.show(new HeaderView(options));
-                this.sidebar.show(new SidebarView(options));
+                this.sidebar.$el.toggleClass('hide-left-bar')
 
             }, this));
 

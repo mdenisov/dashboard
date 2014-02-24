@@ -17,7 +17,12 @@ define([
         template: template,
 
         triggers: {
-            'submit' : 'app:login'
+            'submit'  : 'app:login',
+            '.btn-remind' : 'app:remind'
+        },
+
+        initialize: function () {
+            $('body').addClass('login-body');
         }
 
     });

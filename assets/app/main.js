@@ -28,7 +28,7 @@ define([
         if (href && href.indexOf('#') === 0) {
             event.preventDefault();
 
-            Backbone.history.navigate(href, true);
+//            Backbone.history.navigate(href, true);
         }
     });
 

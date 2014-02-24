@@ -17,7 +17,6 @@ define([
         defaults: {
             email       : '',
             password    : '',
-            name        : '',
             token       : ''
         },
 
@@ -44,6 +43,10 @@ define([
             });
 
             return dfd.promise();
+        },
+
+        remind: function (email, password) {
+
         }
 
     });

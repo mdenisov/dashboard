@@ -24,6 +24,7 @@ define([
         events : {
             'click .sidebar-toggle-box':	'onSidebarToggleClick',
             'click .toggle-right-box':		'onRightToggleClick',
+            'click #logout':		        'onLogoutClick',
             'keypress .search':             'onSearchKeypress'
         },
 
@@ -45,6 +46,11 @@ define([
 //                });
                 this.ui.search.val('');
             }
+        },
+
+        onLogoutClick : function(evt) {
+            evt.preventDefault();
+            vent.trigger('app:logout');
         }
     });
 

@@ -15,6 +15,7 @@ define([
 
         appRoutes: {
             ''         : 'index',
+            '/'        : 'index',
             'index'    : 'index',
             'login'    : 'login',
             'logout'   : 'logout'
