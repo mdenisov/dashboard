@@ -17,6 +17,7 @@ define([
             ''         : 'index',
             '/'        : 'index',
             'index'    : 'index',
+            'page'     : 'page',
             'login'    : 'login',
             'logout'   : 'logout'
         }

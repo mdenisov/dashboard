@@ -117,6 +117,10 @@ define([
         logout: function (args) {
             session.destroy();
             Backbone.history.navigate("#login", {trigger: true});
+        },
+
+        page: function (page) {
+            
         }
 
     };
