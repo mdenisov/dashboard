@@ -2,17 +2,32 @@
  * Created by ROMEO on 22.02.14.
  */
 
-define(['marionette'],function(marionette) {
+define([
+
+    // Libraries.
+    'backbone',
+    'marionette',
+
+    // Modules.
+    'controllers/index'
+
+], function(Backbone, Marionette, controller) {
     'use strict';
 
-    return marionette.AppRouter.extend({
+    var Router = Backbone.Marionette.AppRouter.extend({
 
-        appRoutes:{
+        appRoutes: {
+
             ''              : 'default',
             '/'             : 'default',
-            'page/:page'        : 'page'
+            'page/:page'    : 'page'
+
         }
 
+    });
+
+    return new Router({
+        controller: controller
     });
 
 });

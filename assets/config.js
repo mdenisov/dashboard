@@ -1,6 +1,9 @@
 require.config({
     baseUrl: "./assets/app",
     urlArgs: 'bust=' + (new Date()).getTime(),
+
+    deps: ['bootstrap', 'main'],
+
     paths:{
         // Core Libraries
         "jquery": "../bower_components/jquery/dist/jquery",
@@ -20,7 +23,8 @@ require.config({
         // Plugins
 //        "backbone.validateAll":"../libs/plugins/Backbone.validateAll",
         "bootstrap": "../bower_components/bootstrap/bootstrap.min",
-        "text": "../text"
+        "text": "../text",
+        "jquery.cookie": "../bower_components/jquery.cookie/jquery.cookie"
 //        "text":"../libs/plugins/text",
 //        "jasminejquery": "../libs/plugins/jasmine-jquery"
     },
@@ -72,16 +76,4 @@ require.config({
 
         compileOptions: {}        // options object which is passed to Handlebars compiler
     }
-});
-
-require(['app', 'backbone', 'routers/index', 'controllers/index', 'bootstrap'],function(app, Backbone, Router, Controller) {
-    "use strict";
-
-    app.start();
-
-    new Router({
-        controller : Controller
-    });
-
-    Backbone.history.start();
 });

@@ -2,8 +2,8 @@
  * Created by ROMEO on 22.02.14.
  */
 
-define(['vent'], function (vent) {
-    "use strict";
+define(['vent', 'session'], function (vent, session) {
+    'use strict';
 
     return {
         default : function(param) {
@@ -14,6 +14,20 @@ define(['vent'], function (vent) {
         page : function(page) {
             console.log(page);
 //            vent.trigger('todoList:filter', param.trim() || '');
+        },
+
+        // The login page.
+        login: function() {
+            console.log('called login-controller');
+        },
+
+        // Redirects to the login screen if the user is not logged in.
+        isAuthenticated: function() {
+//            if (!session.authenticated()) {
+//                App.Router.navigate('login', {
+//                    trigger: true
+//                });
+//            }
         }
     };
 });
