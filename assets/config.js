@@ -2,7 +2,7 @@ require.config({
     baseUrl: "./assets/app",
     urlArgs: 'bust=' + (new Date()).getTime(),
 
-    deps: ['bootstrap', 'main'],
+//    deps: ['bootstrap', 'main'],
 
     paths:{
         // Core Libraries
@@ -77,3 +77,5 @@ require.config({
         compileOptions: {}        // options object which is passed to Handlebars compiler
     }
 });
+
+require(['bootstrap', 'main']);
