@@ -13,6 +13,7 @@ define([
     'handlebars'
 
 ], function ($, _, Backbone, Marionette, vent, Handlebars) {
+    'use strict';
 
     // Creates a new Marionette application.
     var App = new Marionette.Application();
@@ -22,7 +23,6 @@ define([
 
     // application configuration
     App.config = {
-        // you can provide an absolute URL like http://api.yourserver.com/v1
         apiUrl: 'api'
     };
 

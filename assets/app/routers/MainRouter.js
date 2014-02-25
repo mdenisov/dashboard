@@ -14,12 +14,10 @@ define([
         controller: MainController,
 
         appRoutes: {
-            ''         : 'index',
-            '/'        : 'index',
-            'index'    : 'index',
-            'page'     : 'page',
-            'login'    : 'login',
-            'logout'   : 'logout'
+            ''              : 'index',
+            '/'             : 'index',
+            'index'         : 'index',
+            'page/:page'    : 'page'
         }
     });
 

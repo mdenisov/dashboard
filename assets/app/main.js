@@ -15,9 +15,9 @@ define([
 
     // Application routers
     'routers/MainRouter',
-    'routers/UserRouter'
+    'routers/AuthRouter'
 
-], function($, App, Auth, MainRouter, UserRouter) {
+], function($, App, Auth, MainRouter, AuthRouter) {
     'use strict';
 
     // Navigation handler
@@ -36,7 +36,7 @@ define([
     var options = {
         routers: {
             main   : MainRouter,
-            user   : UserRouter
+            auth   : AuthRouter
         }
     };
 

@@ -7,7 +7,7 @@ define([
     'underscore',
     'marionette',
     'vent',
-    'hbs!templates/layouts/AppLayoutTemplate'
+    'hbs!templates/layouts/AppCleanLayoutTemplate'
 
 ], function(_, Marionette, vent, MainTemplate) {
     'use strict';
@@ -19,21 +19,12 @@ define([
         template: MainTemplate,
 
         regions: {
-            header:         "#header",
-            sidebar:        "#sidebar",
             content:        "#main"
         },
 
         initialize: function (options) {
 
-            $('body').removeClass('login-body');
-
-            vent.on('sidebar:toggle', _.bind(function() {
-
-                this.sidebar.$el.toggleClass('hide-left-bar');
-                this.content.$el.parent().toggleClass('merge-left');
-
-            }, this));
+            $('body').addClass('login-body');
 
         }
 
