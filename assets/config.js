@@ -29,6 +29,15 @@ require.config({
 //        "jasminejquery": "../libs/plugins/jasmine-jquery"
     },
 
+    config: {
+        //Set the config for the i18n
+        //module ID
+        i18n: {
+            locale: 'ru-ru'
+        }
+    },
+
+
     // Sets the configuration for your third party scripts that are not AMD compatible
     shim:{
         'backbone.localStorage' : ['backbone'],

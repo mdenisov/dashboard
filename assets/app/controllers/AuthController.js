@@ -5,42 +5,23 @@
 define([
 
     'marionette',
-    'views/AppCleanLayoutView',
+    'app',
     'views/IndexView',
     'models/LoginModel',
     'views/LoginView',
     'session',
     'vent'
 
-], function(Marionette, AppCleanLayoutView, IndexView, LoginModel, LoginView, session, vent) {
+], function(Marionette, App, IndexView, LoginModel, LoginView, session, vent) {
     'use strict';
 
-    // private
-    var _initializeLayout = function() {
-        AuthController.layout = new AppCleanLayoutView({
-            model: session
-        });
-
-        AuthController.layout.on("show", function() {
-            vent.trigger("layout:rendered");
-        });
-
-        vent.trigger('app:show', AuthController.layout);
-    };
-
-    vent.on("layout:rendered", function() {
-//        console.log('layout:rendered (MainController)');
-    });
-
-    vent.on("app:logout", function() {
+    vent.on("user:logout", function() {
         AuthController.logout();
     });
 
     var AuthController = {
 
         login: function () {
-
-            _initializeLayout();
 
             if(session.isAuthenticated()) {
                 Backbone.history.navigate("#index", {trigger: true});
@@ -59,7 +40,9 @@ define([
             view.on('app:login', AuthController.authenticate);
             view.on('app:remind', AuthController.remind);
 
-            vent.trigger('app:show', view);
+            this.renderView(view);
+
+//            vent.trigger('app:show', view);
         },
 
         authenticate: function (args) {
@@ -104,7 +87,15 @@ define([
         logout: function (args) {
             session.destroy();
 
+            vent.trigger('app:logout');
+
             Backbone.history.navigate("#login", {trigger: true});
+        },
+
+        renderView: function(view) {
+            App.container.currentView.content.show(view);
+
+            vent.trigger("subview:rendered");
         }
 
     };

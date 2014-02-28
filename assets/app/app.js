@@ -9,10 +9,16 @@ define([
     'underscore',
     'backbone',
     'marionette',
+    'session',
     'vent',
-    'handlebars'
+    'handlebars',
 
-], function ($, _, Backbone, Marionette, vent, Handlebars) {
+    'views/AppCleanLayoutView',
+    'views/AppLayoutView',
+    'views/HeaderView',
+    'views/SidebarView'
+
+], function ($, _, Backbone, Marionette, session, vent, Handlebars, AppCleanLayoutView, AppLayoutView, HeaderView, SidebarView) {
     'use strict';
 
     // Creates a new Marionette application.
@@ -55,6 +61,26 @@ define([
         App.container.show(appView);
     });
 
+    vent.on('app:logon', function(appView) {
+        App.initAppLayout();
+    });
+
+    vent.on('app:logout', function(appView) {
+        App.initAppLayout();
+    });
+
+    vent.on("layout:rendered", function() {
+        console.log('layout:rendered (App)');
+
+        if (session.isAuthenticated()) {
+            App.initFacilities();
+        }
+    });
+
+    vent.on('subview:rendered', function() {
+        console.log('subview:rendered (App)');
+    });
+
     vent.on('modal:show', function(view) {
         App.modal.show(view);
     });
@@ -64,21 +90,8 @@ define([
     });
 
     App.addInitializer(function(options) {
-        // we neeed to override loadTemplate because Marionette expect to recive only the template ID
-        // but actually it's the full template html (require + text plugin)
-        Backbone.Marionette.TemplateCache.prototype.loadTemplate = function (templateId) {
-            var template = templateId;
-            // remove this comment if you want to make sure you have a template before trying to compile it
-            /*
-             if (!template || template.length === 0) {
-             var msg = "Could not find template: '" + templateId + "'";
-             var err = new Error(msg);
-             err.name = "NoTemplateError";
-             throw err;
-             }*/
 
-            return template;
-        };
+        this.initAppLayout();
 
         // init ALL app routers
         _(options.routers).each(function(router) {
@@ -86,6 +99,30 @@ define([
         });
 
     });
+
+    App.initAppLayout = function() {
+        if (session.isAuthenticated()) {
+            var layout = new AppLayoutView({
+                model: session
+            });
+        } else {
+            var layout = new AppCleanLayoutView({
+                model: session
+            });
+        }
+
+        layout.on("show", function() {
+            vent.trigger("layout:rendered");
+        });
+
+        vent.trigger('app:show', layout);
+    };
+
+    App.initFacilities = function() {
+        App.container.currentView.header.show(new HeaderView({model: session}));
+        App.container.currentView.sidebar.show(new SidebarView());
+    };
+
 
     // Returns the app object to be available to other modules through require.js.
     return App;

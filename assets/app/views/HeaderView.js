@@ -41,16 +41,14 @@ define([
             var searchText = this.ui.search.val().trim();
 
             if ( evt.which === ENTER_KEY && searchText ) {
-//                this.collection.create({
-//                    title : todoText
-//                });
+                Backbone.history.navigate("#search/" + searchText, {trigger: true});
                 this.ui.search.val('');
             }
         },
 
         onLogoutClick : function(evt) {
             evt.preventDefault();
-            vent.trigger('app:logout');
+            vent.trigger('user:logout');
         }
     });
 

@@ -17,7 +17,9 @@ define([
             ''              : 'index',
             '/'             : 'index',
             'index'         : 'index',
-            'page/:page'    : 'page'
+            'page/:page'    : 'page',
+            'search/:args'  : 'search',
+            '*action'       : 'default'
         }
     });
 
