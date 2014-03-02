@@ -1,12 +1,12 @@
 /**
- * Created by ROMEO on 24.02.14.
+ * Created by ROMEO on 02.03.14.
  */
 
 define([
 
     'underscore',
     'marionette',
-    'hbs!templates/content/IndexTemplate'
+    'hbs!templates/content/SearchTemplate'
 
 ], function(_, Marionette, template) {
     "use strict";
