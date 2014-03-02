@@ -25,7 +25,8 @@ require.config({
         "bootstrap": "../bower_components/bootstrap/bootstrap.min",
         "text": "../plugins/text",
         "cookie": "../bower_components/jquery.cookie/jquery.cookie",
-        "dcjqaccordion": "../plugins/jquery.dcjqaccordion.2.7"
+        "dcjqaccordion": "../plugins/jquery.dcjqaccordion.2.7",
+        "nicescroll": "../bower_components/jquery.nicescroll/jquery.nicescroll"
     },
 
     config: {
@@ -65,8 +66,9 @@ require.config({
             "exports": "Handlebars"
         },
 
-        //Handlebars
-        "dcjqaccordion": ["jquery"]
+        //Jquery plugins
+        "dcjqaccordion": ["jquery"],
+        "nicescroll": ["jquery"]
 
         // Backbone.validateAll plugin that depends on Backbone
 //        "backbone.validateAll":["backbone"],

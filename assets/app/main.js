@@ -26,7 +26,7 @@ define([
         var href = $(this).attr('href');
 
         if (href && href.indexOf('#') === 0) {
-            event.preventDefault();
+//            event.preventDefault();
 
 //            Backbone.history.navigate(href, true);
         }
