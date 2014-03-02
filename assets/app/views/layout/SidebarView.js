@@ -6,7 +6,8 @@ define([
 
     'marionette',
     'vent',
-    'hbs!templates/layouts/SidebarTemplate'
+    'hbs!templates/layouts/SidebarTemplate',
+    'dcjqaccordion'
 
 ], function (Marionette, vent, SidebarTemplate) {
     "use strict";
@@ -16,10 +17,29 @@ define([
         className: 'clearfix',
 
         ui : {
-
+            navigation: '#nav-accordion'
         },
 
         events : {
+
+        },
+
+        onRender: function() {
+            if ($.fn.dcAccordion) {
+                this.ui.navigation.dcAccordion({
+                    eventType: 'click',
+                    autoClose: true,
+                    saveState: true,
+                    disableLink: true,
+                    speed: 'slow',
+                    showCount: false,
+                    autoExpand: true,
+                    classExpand: 'dcjq-current-parent'
+                });
+            }
+        },
+
+        initialize: function() {
 
         }
     });

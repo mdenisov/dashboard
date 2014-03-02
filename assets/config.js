@@ -24,9 +24,8 @@ require.config({
 //        "backbone.validateAll":"../libs/plugins/Backbone.validateAll",
         "bootstrap": "../bower_components/bootstrap/bootstrap.min",
         "text": "../text",
-        "cookie": "../bower_components/jquery.cookie/jquery.cookie"
-//        "text":"../libs/plugins/text",
-//        "jasminejquery": "../libs/plugins/jasmine-jquery"
+        "cookie": "../bower_components/jquery.cookie/jquery.cookie",
+        "dcjqaccordion": "../plugins/jquery.dcjqaccordion.2.7"
     },
 
     config: {
@@ -54,15 +53,21 @@ require.config({
             // Exports the global window.Backbone object
             "exports": "Backbone"
         },
+
         //Marionette
         "marionette": {
             "deps": ["underscore", "backbone", "jquery"],
             "exports": "Marionette"
         },
+
         //Handlebars
         "handlebars": {
             "exports": "Handlebars"
-        }
+        },
+
+        //Handlebars
+        "dcjqaccordion": ["jquery"]
+
         // Backbone.validateAll plugin that depends on Backbone
 //        "backbone.validateAll":["backbone"],
 
