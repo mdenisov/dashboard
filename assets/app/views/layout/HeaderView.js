@@ -6,7 +6,7 @@ define([
 
     'marionette',
     'vent',
-    'hbs!templates/HeaderTemplate'
+    'hbs!templates/layouts/HeaderTemplate'
 
 ], function (Marionette, vent, HeaderTemplate) {
     "use strict";

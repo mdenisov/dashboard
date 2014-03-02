@@ -6,13 +6,10 @@ define([
 
     'marionette',
     'app',
-    'views/IndexView',
-    'models/LoginModel',
-    'views/LoginView',
     'session',
     'vent'
 
-], function(Marionette, App, IndexView, LoginModel, LoginView, session, vent) {
+], function(Marionette, App, session, vent) {
     'use strict';
 
     vent.on("user:logout", function() {
@@ -21,31 +18,31 @@ define([
 
     var AuthController = {
 
-        login: function () {
+        login: function(args) {
 
             if(session.isAuthenticated()) {
                 Backbone.history.navigate("#index", {trigger: true});
             }
 
-            var loginModel = new LoginModel({
-                email  : session.get('email'),
-                name  : session.get('name'),
-                issuer : session.get('issuer')
-            });
+            require(['models/LoginModel', 'views/LoginView'], _.bind(function(LoginModel, LoginView) {
+                var loginModel = new LoginModel({
+                    email  : session.get('email'),
+                    name  : session.get('name'),
+                    issuer : session.get('issuer')
+                });
 
-            var view = new LoginView({
-                model: loginModel
-            });
+                var view = new LoginView({
+                    model: loginModel
+                });
 
-            view.on('app:login', AuthController.authenticate);
-            view.on('app:remind', AuthController.remind);
+                view.on('app:login', AuthController.authenticate);
+                view.on('app:remind', AuthController.remind);
 
-            this.renderView(view);
-
-//            vent.trigger('app:show', view);
+                this.renderView(view);
+            }, this));
         },
 
-        authenticate: function (args) {
+        authenticate: function(args) {
             var self     = this;
             var email    = this.$('input[name="email"]').val();
             var password = this.$('input[name="password"]').val();
@@ -66,7 +63,7 @@ define([
             );
         },
 
-        remind: function (args) {
+        remind: function(args) {
             var self     = this;
             var email    = this.$('input[name="email"]').val();
             var password = this.$('input[name="password"]').val();
@@ -84,7 +81,11 @@ define([
             );
         },
 
-        logout: function (args) {
+        lock: function(args) {
+
+        },
+
+        logout: function(args) {
             session.destroy();
 
             vent.trigger('app:logout');

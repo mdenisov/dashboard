@@ -3,10 +3,12 @@
  */
 
 define([
+
     'underscore',
     'backbone',
     'marionette',
     'hbs!templates/LoginTemplate'
+
 ], function (_, Backbone, Marionette, template) {
     "use strict";
 

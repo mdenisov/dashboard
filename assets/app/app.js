@@ -13,10 +13,10 @@ define([
     'vent',
     'handlebars',
 
-    'views/AppCleanLayoutView',
-    'views/AppLayoutView',
-    'views/HeaderView',
-    'views/SidebarView'
+    'views/layout/AppCleanLayoutView',
+    'views/layout/AppLayoutView',
+    'views/layout/HeaderView',
+    'views/layout/SidebarView'
 
 ], function ($, _, Backbone, Marionette, session, vent, Handlebars, AppCleanLayoutView, AppLayoutView, HeaderView, SidebarView) {
     'use strict';

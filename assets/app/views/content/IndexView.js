@@ -6,7 +6,7 @@ define([
 
     'underscore',
     'marionette',
-    'hbs!templates/IndexTemplate'
+    'hbs!templates/content/IndexTemplate'
 
 ], function(_, Marionette, template) {
     "use strict";

@@ -6,11 +6,10 @@ define([
 
     'marionette',
     'app',
-    'views/IndexView',
     'session',
     'vent'
 
-], function(Marionette, App, IndexView, session, vent) {
+], function(Marionette, App, session, vent) {
     'use strict';
 
     var MainController = {
@@ -22,9 +21,11 @@ define([
         index: function() {
             this.isAuthenticated();
 
-            var view = new IndexView();
+            require(['views/content/IndexView'], _.bind(function(IndexView) {
+                var view = new IndexView();
 
-            this.renderView(view);
+                this.renderView(view);
+            }, this));
         },
 
         search: function(args) {
