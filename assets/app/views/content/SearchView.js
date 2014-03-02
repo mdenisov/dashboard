@@ -17,7 +17,13 @@ define([
         template: template,
 
         initialize: function (options) {
+            this.arguments = options.arguments;
+        },
 
+        serializeData: function(){
+            return {
+                arguments: this.arguments
+            }
         }
 
     });

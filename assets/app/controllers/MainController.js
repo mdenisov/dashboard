@@ -30,7 +30,7 @@ define([
 
         search: function(args) {
             require(['views/content/SearchView'], _.bind(function(SearchView) {
-                var view = new SearchView();
+                var view = new SearchView({arguments: args});
 
                 this.renderView(view);
             }, this));
