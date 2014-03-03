@@ -6,7 +6,7 @@ Dashboard Admin is a premium, full featured, responsive admin template that help
 Feature List
 -------
 
-* Built on Bootstrap 2.1.1
+* Built on Bootstrap, Backbone Marionette, Handlebars
 * Responsive Layout supports the following popular devices:
   * Desktops
   * Tablet Devices
